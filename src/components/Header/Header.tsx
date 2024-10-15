@@ -1,10 +1,16 @@
 'use client';
 import { RiArrowDropDownLine, RiHeartLine, RiSearchLine, RiShoppingCartLine, RiUser3Line } from '@remixicon/react'
+import Link from 'next/link';
 import React, { useState } from 'react'
 
 const Header = () => {
 
     const [searchPopup, setSearchPopup] = useState(false);
+    const [headerpopupBox, setHeaderPopupBox] = useState({
+        user: false,
+        cart: false,
+        wishlist: false
+    })
 
     return (
         <header className='bg-white px-3 py-4 flex justify-center'>
@@ -36,28 +42,75 @@ const Header = () => {
                     {/* Desktop Login/SignUp Btn */}
                     <div className='w-max flex flex-nowrap gap-2 items-center justify-start mr-4'>
                         <RiUser3Line size={25} className='text-lg' />
-                        <div className='text-base flex flex-col gap-0 cursor-pointer'>
+                        <div
+                            onClick={() => {
+                                setHeaderPopupBox({
+                                    user: !headerpopupBox.user,
+                                    cart: false,
+                                    wishlist: false
+                                })
+                            }}
+                            className='text-base flex flex-col gap-0 cursor-pointer'>
                             <p className='m-0 font-semibold'>Login</p>
                             <span className='text-xs'>or SignUp</span>
                         </div>
+                        {
+                            headerpopupBox.user &&
+                            <div className='absolute top-16 bg-white rounded shadow-md'>
+                                <div className='flex flex-nowrap font-medium text-base'>
+                                    <p className='py-2 px-4 text-blue-500 bg-blue-50'><Link href={'/users/login'}>Login</Link></p>
+                                    <p className='py-2 px-4 bg-blue-500 text-white'><Link href={'/users/signup'}>SignUp</Link></p>
+                                </div>
+                            </div>
+                        }
+
                     </div>
-                    
+
                     {/* Cart Icon */}
-                    <div className='w-max flex flex-nowrap gap-2 items-center justify-start hover:bg-blue-50 py-1 px-3 rounded-md'>
+                    <div className={`w-max flex flex-nowrap gap-2 items-center justify-start hover:bg-blue-50 py-1 px-3 rounded-md`}>
                         <RiShoppingCartLine size={25} className='text-lg' />
-                        <div className='text-base flex flex-nowrap gap-0 cursor-pointer'>
+                        <div
+                            onClick={() => {
+                                setHeaderPopupBox({
+                                    cart: !headerpopupBox.cart,
+                                    wishlist: false,
+                                    user: false
+                                })
+                            }}
+                            className='text-base flex flex-nowrap gap-0 cursor-pointer'>
                             <p className='m-0 font-semibold'>Cart</p>
                             <RiArrowDropDownLine size={20} />
                         </div>
+                        {
+                            headerpopupBox.cart &&
+                            <div className='absolute top-16 p-5 bg-white rounded shadow-md'>
+                                <h2>Cart Box</h2>
+                            </div>
+                        }
                     </div>
 
                     {/* Wishlist Icon */}
-                    <div className='w-max flex flex-nowrap gap-2 items-center justify-start hover:bg-blue-50 py-1 px-3 rounded-md'>
+                    <div className={`w-max flex flex-nowrap gap-2 items-center justify-start hover:bg-blue-50 py-1 px-3 rounded-md`}>
                         <RiHeartLine size={25} className='text-lg' />
-                        <div className='text-base flex flex-nowrap gap-0 cursor-pointer'>
+                        <div
+                            onClick={() => {
+                                setHeaderPopupBox({
+                                    wishlist: !headerpopupBox.wishlist,
+                                    cart: false,
+                                    user: false
+                                })
+                            }}
+                            className='text-base flex flex-nowrap gap-0 cursor-pointer'>
                             <p className='m-0 font-semibold'>Wishlist</p>
                             <RiArrowDropDownLine size={20} />
                         </div>
+                        {
+                            headerpopupBox.wishlist &&
+                            <div className='absolute top-16 p-5 bg-white rounded shadow-md text-black'>
+                                <h2>Wishlist box</h2>
+                            </div>
+                        }
+
                     </div>
                 </div>
             </div>
