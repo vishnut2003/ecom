@@ -26,7 +26,9 @@ export default function RootLayout({
         className={`${rubik.className} antialiased bg-slate-100`}
       >
         <Header />
-        {children}
+        <div className="flex flex-col justify-start items-center p-10">
+          {children}
+        </div>
         <Footer />
       </body>
     </html>

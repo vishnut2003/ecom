@@ -12,6 +12,8 @@ const Header = () => {
         wishlist: false
     })
 
+    const closeAllPopup = () => setHeaderPopupBox({ user: false, cart: false, wishlist: false })
+
     return (
         <header className='bg-white px-3 py-4 flex justify-center'>
             <div className='max-w-screen-2xl w-full flex gap-5 flex-nowrap items-center'>
@@ -58,8 +60,8 @@ const Header = () => {
                             headerpopupBox.user &&
                             <div className='absolute top-16 bg-white rounded shadow-md'>
                                 <div className='flex flex-nowrap font-medium text-base'>
-                                    <p className='py-2 px-4 text-blue-500 bg-blue-50'><Link href={'/users/login'}>Login</Link></p>
-                                    <p className='py-2 px-4 bg-blue-500 text-white'><Link href={'/users/signup'}>SignUp</Link></p>
+                                    <p onClick={closeAllPopup} className='py-2 px-4 text-blue-500 bg-blue-50'><Link href={'/users/login'}>Login</Link></p>
+                                    <p onClick={closeAllPopup} className='py-2 px-4 bg-blue-500 text-white'><Link href={'/users/signup'}>SignUp</Link></p>
                                 </div>
                             </div>
                         }
